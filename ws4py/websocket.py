@@ -168,7 +168,7 @@ class WebSocket(object):
         
         if isinstance(payload, basestring) or isinstance(payload, bytearray):
             m = message_sender(payload).single(mask=self.stream.always_mask)
-            self.sender(m)
+            self.sender(str(m))
 
         elif isinstance(payload, Message):
             data = payload.single(mask=self.stream.always_mask)

@@ -69,7 +69,8 @@ class WebSocketBaseClient(WebSocket):
     def close(self, code=1000, reason=''):
         if not self.client_terminated:
             self.client_terminated = True
-            self.sender(self.stream.close(code=code, reason=reason).single(mask=True))
+            m = self.stream.close(code=code, reason=reason).single(mask=True)
+            self.sender(str(m))
 
     def connect(self):
         #self.sock.settimeout(3)
