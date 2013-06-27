@@ -69,6 +69,9 @@ class WebSocketBaseClient(WebSocket):
     def close(self, code=1000, reason=''):
         if not self.client_terminated:
             self.client_terminated = True
+
+            # CA, Inc. has made the following changes to python ws4py
+            # Adding support for sending messages in ws4py for secure connections (wss://) in python 2.6 where SSL module does not support bytearrays.
             m = self.stream.close(code=code, reason=reason).single(mask=True)
             self.sender(str(m))
 

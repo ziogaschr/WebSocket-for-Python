@@ -168,6 +168,9 @@ class WebSocket(object):
         
         if isinstance(payload, basestring) or isinstance(payload, bytearray):
             m = message_sender(payload).single(mask=self.stream.always_mask)
+
+            # CA, Inc. has made the following changes to python ws4py
+            # Adding support for sending messages in ws4py for secure connections (wss://) in python 2.6 where SSL module does not support bytearrays.
             self.sender(str(m))
 
         elif isinstance(payload, Message):
